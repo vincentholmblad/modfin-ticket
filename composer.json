@@ -1,0 +1,12 @@
+{
+    "name": "vincentholmblad/modfin-ticket",
+    "description": "Programmer test case",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Vincent Holmblad",
+            "email": "vincent.holmblad@mediaempire.se"
+        }
+    ],
+    "require": {}
+}
