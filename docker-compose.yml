@@ -12,7 +12,6 @@ services:
       - ./traefik/traefik.toml:/traefik.toml
     ports:
       - "8080:8080"
-      - "8081:8081"
       - "8000:8000"
 
   postgres:
@@ -41,6 +40,11 @@ services:
       - "traefik.frontend.rule=PathPrefix:/"
     volumes:
       - ./tickets-frontend:/tickets-frontend
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
 
 
   tickets-backend:

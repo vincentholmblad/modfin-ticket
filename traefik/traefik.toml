@@ -16,6 +16,8 @@ domain = "docker.localhost"
 
 exposedbydefault = false
 
+watch = true
+
 [entryPoints]
     [entryPoints.tickets]
       address = ":8000"

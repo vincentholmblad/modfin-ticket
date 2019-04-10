@@ -1,4 +1,10 @@
-FROM node:9.11.1-alpine
+FROM node:carbon-slim
+# vue-cli reqires 8.10.0+ 
+
+# RUN apt-get -y update \
+#   && apt-get install -y git
+
+# RUN npm install -g @vue/cli
 
 # install simple http server for serving static content
 RUN npm install -g http-server
@@ -19,4 +25,8 @@ COPY . .
 RUN npm run build
 
 EXPOSE 8081
-CMD http-server ./dist -p=8081
+CMD http-server ./dist -p 8081
+
+#USER node
+
+#CMD ["yarn", "serve"]
