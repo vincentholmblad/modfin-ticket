@@ -6,30 +6,28 @@
             <span class="float-right font-thin text-base opacity-50">{{ tickets.length }} ticket(s)</span>
         </div>
         <div class="list-inner">
-            <ticket-list-item v-for="(ticket, index) in orderedTicketsArray" v-bind:key="ticket.ticked_id && ticket.modified_at && index" :ticket="ticket" />
+            <ticket-list-item v-for="(ticket, index) in tickets" v-bind:key="ticket.ticked_id && ticket.modified_at && index" :ticket="ticket" />
         </div>
     </div>
 </drop>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import TicketListItem from '@/components/TicketListItem.vue'
 export default {
-    props: ['tickets', 'header'],
+    props: ['header', 'slug'],
     components: {
         TicketListItem
     },
-    data: () => ({
-        orderedTicketsArray: []
-    }),
-    watch: {
-        tickets(newTickets) {
-            this.orderedTicketsArray = newTickets.sort((a, b) => (new Date(b.modified_at)).getTime() - (new Date(a.modified_at)).getTime())
+    computed: {
+        tickets() {
+            return this.$store.getters['tickets/ticketsByStatus'](this.slug);
         }
     },
     methods: {
         droppedTicket(data) {
-            this.$bus.emit('change-status', { ticket: data, status: this.header });
+            this.$bus.emit('change-status', { ticket: data, status: this.slug });
         }
     }
 }

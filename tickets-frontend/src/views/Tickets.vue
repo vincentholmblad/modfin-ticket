@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <app-header class="flex-no-grow" id="app-nav" v-model="search" />
-    <tickets-list class="flex-grow" id="app-content" :filter="search" />
+    <app-header class="flex-no-grow" id="app-nav" />
+    <tickets-list class="flex-grow" id="app-content" />
     <create-ticket-modal />
   </div>
 </template>
@@ -23,10 +23,7 @@ export default {
     AppHeader,
     CreateTicketModal,
     TicketsList
-  },
-  data: () => ({
-    search: ''
-  })
+  }
 }
 </script>
 

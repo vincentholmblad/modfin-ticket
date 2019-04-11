@@ -46,7 +46,7 @@ export default {
       this.$bus.emit("open-create-ticket-modal");
     },
     searchEmit() {
-      this.$emit("input", this.search);
+      this.$store.dispatch('tickets/filter', this.search);
     },
     signOut() {
       this.$cookie.delete('username');

@@ -95,11 +95,32 @@ func UpdateTicketStatus(id int64, status string) (updated api.Ticket, err error)
 	return updated, nil
 }
 
+func DeleteTicket(id int64) (err error) {
+
+	db := GetDB().Unsafe()
+
+	res, err := db.Exec("DELETE FROM tickets WHERE ticket_id=$1", id)
+
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+
+	count, err := res.RowsAffected()
+
+	if err != nil || count != 1 {
+		log.Error(err)
+		return err
+	}
+
+	return nil
+}
+
 // func DeteteTicket(id) (error) {
 
 // 	db := GetDB().Unsafe()
 
-// 	err := db.MustExec("DELETE FROM tickets WHERE id = :id", id)
+// 	err := db.MustExec("", id)
 
 // 	if err != nil {
 // 		log.Error(err)
