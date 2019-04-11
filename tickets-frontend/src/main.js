@@ -18,10 +18,6 @@ import { Drag, Drop } from 'vue-drag-drop';
 Vue.component('drag', Drag);
 Vue.component('drop', Drop);
 
-import Vue2Filters from 'vue2-filters'
-
-Vue.use(Vue2Filters)
-
 Vue.use(require('vue-moment'));
 
 require('@/assets/scss/main.scss');

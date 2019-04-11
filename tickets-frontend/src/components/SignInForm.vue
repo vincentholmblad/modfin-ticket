@@ -36,7 +36,6 @@ export default {
       if (this.name.length) {
         this.$cookie.set("username", this.name);
         this.$root.userName = this.name;
-        this.$router.push("/tickets");
       }
     }
   }

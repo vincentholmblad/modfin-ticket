@@ -51,7 +51,6 @@ export default {
     signOut() {
       this.$cookie.delete('username');
       this.$root.userName = ''
-      this.$router.push("/")
     }
   }
 };
