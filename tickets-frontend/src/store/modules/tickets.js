@@ -4,7 +4,8 @@ import Vue from 'vue'
 // initial state
 const state = {
     all: [],
-    filter: ''
+    filter: '',
+    orderBy: 'modified_at'
 }
 
 // getters
@@ -17,7 +18,15 @@ const getters = {
                 ticket.author.toLowerCase().includes(state.filter.toLowerCase())
             )
         }).sort((a, b) => {
-            return (new Date(b.modified_at)).getTime() - (new Date(a.modified_at)).getTime()
+            if(state.orderBy == 'modified_at') {
+                return (new Date(b.modified_at)).getTime() - (new Date(a.modified_at)).getTime()
+            } else if(state.orderBy == 'created_at') {
+                return (new Date(b.created_at)).getTime() - (new Date(a.created_at)).getTime()
+            } else if(state.orderBy == 'title') {
+                return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
+            } else if(state.orderBy == 'author') {
+                return (a.author > b.author) ? 1 : ((b.author > a.author) ? -1 : 0);
+            }
         })
     }
 }
@@ -46,6 +55,9 @@ const actions = {
     },
     filter({ commit }, filter) {
         commit('setFilter', filter);
+    },
+    order({ commit }, order) {
+        commit('setOrder', order);
     }
 }
 
@@ -58,15 +70,18 @@ const mutations = {
         state.all.push(ticket);
     },
     updateTicket(state, ticket) {
-        var ticketIndex = state.all.map(function (e) { return e.ticket_id; }).indexOf(ticket.ticket_id);
+        var ticketIndex = state.all.map((e) => { return e.ticket_id; }).indexOf(ticket.ticket_id);
         Vue.set(state.all, ticketIndex, ticket);
     },
     removeTicket(state, ticket) {
-        var ticketIndex = state.all.map(function (e) { return e.ticket_id; }).indexOf(ticket.ticket_id);
+        var ticketIndex = state.all.map((e) => { return e.ticket_id; }).indexOf(ticket.ticket_id);
         Vue.delete(state.all, ticketIndex);
     },
     setFilter(state, filter) {
         state.filter = filter;
+    },
+    setOrder(state, order) {
+        state.orderBy = order;
     }
 }
 
