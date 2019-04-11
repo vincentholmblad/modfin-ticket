@@ -3,16 +3,11 @@
     <ticket-list-column class="w-1/3 border-r" header="Waiting" slug="waiting"/>
     <ticket-list-column class="w-1/3 border-r" header="In Progress" slug="doing"/>
     <ticket-list-column class="w-1/3" header="Completed" slug="done"/>
-    <sweet-modal icon="warning" ref="deleteModal">
-      <h3 class="mb-6">Are you sure?</h3>
+    <sweet-modal title="Are you sure?" ref="deleteModal" class="text-left" width="400">
       <button
         @click="deleteTicketFlush()"
-        class="shadow bg-purple hover:bg-purple-light focus:shadow-outline focus:outline-none text-white font-bold py-4 px-4 rounded w-full mb-4 text-lg"
+        class="shadow bg-purple hover:bg-purple-light focus:shadow-outline focus:outline-none text-white font-bold py-3 px-4 rounded w-full"
       >Yes, delete the ticket</button>
-      <button
-        @click="$refs.deleteModal.close()"
-        class="focus:outline-none -mb-12 bg-white hover:text-grey-darker focus:outline-none text-grey font-bold py-3 px-4 rounded w-full"
-      >Cancel</button>
     </sweet-modal>
   </div>
 </template>

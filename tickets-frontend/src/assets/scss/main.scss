@@ -65,3 +65,7 @@
       height: 100%;
       width: 100%;
   }
+
+  .sweet-modal .sweet-box-actions .sweet-action-close:hover {
+      background-color: config('colors.purple') !important;
+  }
