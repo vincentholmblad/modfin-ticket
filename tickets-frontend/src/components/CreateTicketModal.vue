@@ -10,12 +10,12 @@
         <button class="close focus:outline-none" @click.prevent="modalOpen = false"></button>
       </div>
       <div class="p-6">
-        <div class="mb-4">
-          <span
+        <span
             v-if="formError"
             v-html="formError"
-            class="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
+            class=""
           ></span>
+        <div class="mb-4">
           <label
             class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
             for="grid-first-name"
@@ -89,16 +89,12 @@ export default {
         this.form.status.length &&
         this.form.author.length
       ) {
-        this.axios
-          .post("http://localhost:8000/api/tickets/", ticket)
-          .then(data => {
-            this.$bus.emit("add-ticket", data.data);
-            this.closeModal();
-          })
-          .catch(e => {
-            console.log(e);
-            this.formError = "Something went wrong. Please try again.";
-          });
+        try {
+          this.$bus.emit("add-ticket", ticket);
+          this.closeModal();
+        } catch {
+          this.formError = "Something went wromg. Please try again.";
+        }
       } else {
         this.formError = "Please fill in all fields.";
       }
