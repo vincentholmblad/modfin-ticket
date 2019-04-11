@@ -1,7 +1,7 @@
 <template>
 <drop @drop="droppedTicket">
     <div class="w-full h-full overflow-y-auto text-left relative list-col">
-        <div class="list-col-header px-6 py-4 border-b flex items-center justify-between sticky bg-purple-lightest">
+        <div class="list-col-header px-6 py-4 border-b flex items-center justify-between sticky bg-purple-lightest mt-4">
             <h1 class="text-2xl leading-narrow">{{ header }}</h1>
             <span class="float-right font-thin text-base opacity-50">{{ tickets.length }} ticket(s)</span>
         </div>

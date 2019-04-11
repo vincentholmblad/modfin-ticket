@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "sweet-modal-vue": "^2.0.0",
     "tailwindcss": "^0.7.4",
     "vue": "^2.6.6",
     "vue-axios": "^2.1.4",

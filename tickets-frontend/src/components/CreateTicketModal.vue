@@ -1,19 +1,12 @@
 <template>
-  <div class="fixed pin-x pin-y flex items-center justify-center z-20" v-if="modalOpen">
-    <div class="fixed pin-x pin-y bg-grey-darkest opacity-75" @click="modalOpen = false"></div>
+  <sweet-modal title="Create a new ticket" ref="modal" class="text-left">
     <form
       @submit.prevent="createTicket(form)"
-      class="border bg-white text-left shadow-lg w-full rounded-lg max-w-md relative z-10"
     >
-      <div class="border-b border-grey-light p-6 relative">
-        <h1 class="text-2xl">Create a new ticket</h1>
-        <button class="close focus:outline-none" @click.prevent="modalOpen = false"></button>
-      </div>
-      <div class="p-6">
         <span
             v-if="formError"
             v-html="formError"
-            class=""
+            class="text-red mb-6 text-lg block"
           ></span>
         <div class="mb-4">
           <label
@@ -38,11 +31,11 @@
           ></textarea>
         </div>
       </div>
-      <div class="border-t border-grey-light p-6 -mt-2 relative text-right">
+      <div class="text-right">
         <button
-          @click.prevent="modalOpen = false"
+          @click.prevent="$refs.modal.close()"
           type="submit"
-          class="focus:outline-none bg-white hover:bg-grey-lighter hover:text-grey-darker focus:shadow-outline focus:outline-none text-grey font-bold py-3 px-4 rounded mr-4"
+          class="focus:outline-none bg-white hover:bg-grey-lighter hover:text-grey-darker focus:outline-none text-grey font-bold py-3 px-4 rounded mr-4"
         >Cancel</button>
         <button
           type="submit"
@@ -50,10 +43,11 @@
         >Submit ticket</button>
       </div>
     </form>
-  </div>
+  </sweet-modal>
 </template>
 
 <script>
+import { SweetModal } from "sweet-modal-vue";
 export default {
   data: () => ({
     formError: null,
@@ -62,9 +56,11 @@ export default {
       content: "",
       status: "waiting",
       author: ""
-    },
-    modalOpen: false
+    }
   }),
+  components: {
+    SweetModal
+  },
   created() {
     this.$bus.on("open-create-ticket-modal", this.openModal);
     this.$bus.on("close-create-ticket-modal", this.closeModal);
@@ -75,10 +71,10 @@ export default {
   },
   methods: {
     openModal() {
-      this.modalOpen = true;
+      this.$refs.modal.open();
     },
     closeModal() {
-      this.modalOpen = false;
+      this.$refs.modal.close();
     },
     createTicket(ticket) {
       this.formError = null;
